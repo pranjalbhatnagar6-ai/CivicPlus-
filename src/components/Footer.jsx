@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import "../Footer.css";
+=======
 import "./Footer.css";
+>>>>>>> 6fa762a6ca8782d43ce139aa7ff33dd0299db4cf
 
 function Footer() {
   return (
