@@ -1,10 +1,6 @@
 import { FaUser, FaShieldAlt, FaBroom } from "react-icons/fa";
-path = "/citizen/login"
-path = "/staff/login"
-path = "/worker/login"
-
-import RoleCard from "./RoleCard";
 import "./RoleSection.css";
+import RoleCard from "./RoleCard";
 
 function RoleSection() {
   return (

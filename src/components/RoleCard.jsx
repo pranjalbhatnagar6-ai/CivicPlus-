@@ -1,46 +1,28 @@
-import { useNavigate } from "react-router-dom";
 import "./RoleCard.css";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-onClick={() => navigate(path)}
-
-function RoleCard({
-  icon,
-  title,
-  description,
-  buttonText,
-  color,
-  iconBackground,
-  path,
-}) {
+export default function RoleCard({ title, description, icon, path }) {
   const navigate = useNavigate();
 
   return (
-    <div className="role-card">
-      <div
-        className="role-icon"
-        style={{
-          backgroundColor: iconBackground,
-          color: color,
-        }}
-      >
-        {icon}
-      </div>
-
-      <h2>{title}</h2>
-
+    <div
+      className="role-card"
+      onClick={() => navigate(path)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          navigate(path);
+        }
+      }}
+    >
+      <div className="role-card-icon">{icon}</div>
+      <h3>{title}</h3>
       <p>{description}</p>
-
-      <button
-        className="role-button"
-        style={{ backgroundColor: color }}
-        onClick={() => navigate(path)}
-      >
-        {buttonText}
+      <button type="button" onClick={() => navigate(path)}>
+        Continue
       </button>
     </div>
   );
 }
-
-export default RoleCard;
