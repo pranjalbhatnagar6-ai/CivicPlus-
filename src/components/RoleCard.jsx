@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./RoleCard.css";
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
+onClick={() => navigate(path)}
 
 function RoleCard({
   icon,
@@ -7,10 +12,12 @@ function RoleCard({
   buttonText,
   color,
   iconBackground,
+  path,
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className="role-card">
-
       <div
         className="role-icon"
         style={{
@@ -28,10 +35,10 @@ function RoleCard({
       <button
         className="role-button"
         style={{ backgroundColor: color }}
+        onClick={() => navigate(path)}
       >
         {buttonText}
       </button>
-
     </div>
   );
 }
