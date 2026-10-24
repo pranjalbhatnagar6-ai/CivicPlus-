@@ -1,0 +1,8 @@
+.role-section {
+  display: flex;
+  gap: 25px;
+
+  padding: 35px 50px 60px;
+
+  background: #f8faf8;
+}

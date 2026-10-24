@@ -1,16 +1,7 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Hero from "./components/hero";
-import RoleCard from "./components/RoleCard";
+import Home from "./pages/Home";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <RoleCard/>
-    </>
-  );
+  return <Home />;
 }
 
 export default App;
