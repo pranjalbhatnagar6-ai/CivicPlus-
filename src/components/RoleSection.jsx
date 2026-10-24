@@ -1,7 +1,7 @@
 import { FaUser, FaShieldAlt, FaBroom } from "react-icons/fa";
-path="/citizen/login"
-path="/staff/login"
-path="/worker/login"
+path = "/citizen/login"
+path = "/staff/login"
+path = "/worker/login"
 
 import RoleCard from "./RoleCard";
 import "./RoleSection.css";
@@ -17,6 +17,7 @@ function RoleSection() {
         buttonText="Continue as Citizen"
         color="#08775e"
         iconBackground="#d9f3eb"
+        path="/citizen/login"
       />
 
       <RoleCard
@@ -26,6 +27,7 @@ function RoleSection() {
         buttonText="Continue as Staff"
         color="#934337"
         iconBackground="#f6dfdb"
+        path="/staff/login"
       />
 
       <RoleCard
@@ -35,6 +37,7 @@ function RoleSection() {
         buttonText="Continue as Worker"
         color="#ffad21"
         iconBackground="#fff0cf"
+        path="/worker/login"
       />
 
     </section>

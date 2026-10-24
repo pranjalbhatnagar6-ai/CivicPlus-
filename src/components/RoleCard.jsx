@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./RoleCard.css";
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
+onClick={() => navigate(path)}
 
 function RoleCard({
   icon,
