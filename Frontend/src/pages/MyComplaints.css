@@ -1,0 +1,171 @@
+.clean-complaints-page {
+  min-height: 100vh;
+  background-color: #f7faf8;
+  padding-bottom: 90px;
+}
+
+@media (min-width: 1024px) {
+  .clean-complaints-page {
+    padding-bottom: 40px;
+  }
+}
+
+.complaints-main-container {
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+.complaints-title-header {
+  margin-bottom: 24px;
+}
+
+.complaints-title-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* Tabs */
+.complaints-filter-tabs {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #e2ebe4;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+.filter-pill-btn {
+  background: none;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.filter-pill-btn:hover {
+  color: #111827;
+  background: #f1f5f2;
+}
+
+.filter-pill-btn.active {
+  color: #08775e;
+  background: #e6f6ee;
+}
+
+/* Cards List */
+.complaints-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.complaint-row-card {
+  background: #ffffff;
+  border: 1px solid var(--cc-border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.complaint-row-card:hover {
+  transform: translateY(-2px);
+  border-color: #08775e;
+  box-shadow: 0 8px 24px rgba(8, 119, 94, 0.08);
+}
+
+.complaint-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.complaint-type-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #f1f5f3;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.complaint-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.id-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.complaint-tag-id {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.complaint-status-pill {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.complaint-status-pill.in-progress {
+  background: #08775e;
+  color: #ffffff;
+}
+
+.complaint-status-pill.pending {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.complaint-status-pill.resolved {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.complaint-main-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.complaint-location-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.chevron-arrow-icon {
+  font-size: 16px;
+  color: #94a3b8;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.complaint-row-card:hover .chevron-arrow-icon {
+  color: #08775e;
+  transform: translateX(3px);
+}
