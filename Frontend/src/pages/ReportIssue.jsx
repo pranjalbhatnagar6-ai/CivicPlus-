@@ -10,6 +10,18 @@ import {
 } from "react-icons/fa";
 import "./ReportIssue.css";
 
+const STORAGE_KEY = "civicplus_reports";
+const MAX_PHOTO_SIZE = 5 * 1024 * 1024;
+
+function getSavedReports() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
 function ReportIssue() {
   const navigate = useNavigate();
 
@@ -22,45 +34,114 @@ function ReportIssue() {
 
   const [photo, setPhoto] = useState(null);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+
+    setError("");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handlePhotoChange = (event) => {
+    const file = event.target.files?.[0];
 
-    // Frontend demo only; backend integration comes next.
-    const complaint = {
-      ...form,
-      photoName: photo?.name || "",
-      status: "Pending",
-      createdAt: new Date().toISOString(),
-    };
+    setPhoto(null);
+    setError("");
 
-    const savedReports = JSON.parse(
-      localStorage.getItem("civicplus-reports") || "[]"
-    );
+    if (!file) return;
 
-    localStorage.setItem(
-      "civicplus-reports",
-      JSON.stringify([...savedReports, complaint])
-    );
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
-    setMessage("Your complaint has been submitted successfully!");
-    setTimeout(() => navigate("/citizen/dashboard"), 1200);
+    if (!allowedTypes.includes(file.type)) {
+      setError("Please upload a JPG, PNG, or WEBP image.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > MAX_PHOTO_SIZE) {
+      setError("The image must be smaller than 5 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    setPhoto(file);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setError("");
+    setMessage("");
+
+    if (
+      !form.title.trim() ||
+      !form.category ||
+      !form.location.trim() ||
+      !form.description.trim()
+    ) {
+      setError("Please complete all required fields.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const savedReports = getSavedReports();
+
+      const complaint = {
+        id: `CP-${Date.now()}`,
+        title: form.title.trim(),
+        category: form.category,
+        location: form.location.trim(),
+        description: form.description.trim(),
+        photoName: photo?.name || "",
+        status: "Pending",
+        date: new Date().toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }),
+        createdAt: new Date().toISOString(),
+      };
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify([complaint, ...savedReports])
+      );
+
+      setMessage("Your complaint was submitted successfully!");
+
+      // Navigate after successful browser storage save.
+      window.setTimeout(() => {
+        navigate("/citizen/dashboard");
+      }, 900);
+    } catch {
+      setError(
+        "Unable to save this complaint in your browser. Please try again."
+      );
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="issue-page">
       <header className="issue-header">
         <button
+          type="button"
           className="issue-back"
           onClick={() => navigate("/citizen/dashboard")}
         >
           <FaArrowLeft /> Back to Dashboard
         </button>
-        <strong>CivicPlus<span>+</span></strong>
+
+        <strong>
+          CivicPlus<span>+</span>
+        </strong>
       </header>
 
       <main className="issue-container">
@@ -74,8 +155,23 @@ function ReportIssue() {
         </div>
 
         {message && (
-          <div className="issue-success">
+          <div className="issue-success" role="status">
             <FaCheckCircle /> {message}
+          </div>
+        )}
+
+        {error && (
+          <div
+            role="alert"
+            style={{
+              padding: "12px 16px",
+              marginBottom: 16,
+              borderRadius: 8,
+              color: "#b91c1c",
+              background: "#fef2f2",
+            }}
+          >
+            {error}
           </div>
         )}
 
@@ -149,6 +245,7 @@ function ReportIssue() {
 
           <div className="issue-field">
             <label htmlFor="photo">Upload a photo (optional)</label>
+
             <label className="issue-upload" htmlFor="photo">
               <FaCamera />
               <span>
@@ -156,25 +253,25 @@ function ReportIssue() {
                 <small>JPG, PNG or WEBP · Maximum 5 MB</small>
               </span>
             </label>
+
             <input
               className="issue-file-input"
               id="photo"
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-
-                if (file.size > 5 * 1024 * 1024) {
-                  alert("Please select an image smaller than 5 MB.");
-                  e.target.value = "";
-                  setPhoto(null);
-                  return;
-                }
-
-                setPhoto(file);
-              }}
+              onChange={handlePhotoChange}
             />
+
+            {photo && (
+              <button
+                type="button"
+                className="issue-back"
+                onClick={() => setPhoto(null)}
+                style={{ marginTop: 8 }}
+              >
+                Remove selected photo
+              </button>
+            )}
           </div>
 
           <div className="issue-actions">
@@ -182,12 +279,18 @@ function ReportIssue() {
               type="button"
               className="issue-cancel"
               onClick={() => navigate("/citizen/dashboard")}
+              disabled={submitting}
             >
               Cancel
             </button>
 
-            <button type="submit" className="issue-submit">
-              <FaTrashAlt /> Submit Complaint
+            <button
+              type="submit"
+              className="issue-submit"
+              disabled={submitting}
+            >
+              <FaTrashAlt />
+              {submitting ? "Submitting..." : "Submit Complaint"}
             </button>
           </div>
         </form>

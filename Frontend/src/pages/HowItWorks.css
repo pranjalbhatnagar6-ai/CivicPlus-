@@ -1,0 +1,349 @@
+.how-page {
+  min-height: 100vh;
+  background-color: #f8fbf9;
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero Section */
+.how-hero {
+  background: linear-gradient(135deg, #064e3b 0%, #08775e 50%, #0d9488 100%);
+  color: white;
+  padding: 80px 24px 85px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.how-hero h1 {
+  font-size: clamp(32px, 5vw, 46px);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 18px;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.how-hero h1 span {
+  color: #a7f3d0;
+}
+
+.how-hero p {
+  font-size: clamp(16px, 2vw, 18px);
+  color: #e6f4ea;
+  max-width: 660px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 4-Step Process Section */
+.how-process-section {
+  max-width: 1200px;
+  margin: 60px auto 80px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.process-card {
+  background: white;
+  border-radius: 18px;
+  padding: 34px 26px;
+  border: 1px solid #e2ebe4;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.process-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(8, 119, 94, 0.12);
+  border-color: #08775e;
+}
+
+.process-step-num {
+  position: absolute;
+  top: -16px;
+  left: 26px;
+  width: 36px;
+  height: 36px;
+  background: #08775e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(8, 119, 94, 0.3);
+}
+
+.process-icon-wrap {
+  width: 60px;
+  height: 60px;
+  background: #eef8f4;
+  color: #08775e;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 8px 0 20px;
+}
+
+.process-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.process-card p {
+  color: #4b5563;
+  font-size: 14.5px;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.process-tag {
+  margin-top: 20px;
+  padding: 6px 12px;
+  background: #f1f7f4;
+  border-radius: 8px;
+  color: #08775e;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* Interactive Role Tabs Section */
+.how-roles-section {
+  background: #ffffff;
+  padding: 70px 24px;
+  border-top: 1px solid #e5ede7;
+  border-bottom: 1px solid #e5ede7;
+  margin-bottom: 80px;
+}
+
+.roles-inner {
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.role-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0 40px;
+  flex-wrap: wrap;
+}
+
+.role-tab-btn {
+  padding: 12px 24px;
+  background: #f1f5f3;
+  color: #4b5563;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.role-tab-btn:hover {
+  background: #e6ede9;
+  color: #111827;
+}
+
+.role-tab-btn.active {
+  background: #08775e;
+  color: white;
+  box-shadow: 0 4px 14px rgba(8, 119, 94, 0.25);
+}
+
+.role-content-box {
+  background: #f8fbf9;
+  border: 1px solid #e0ebe3;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (max-width: 820px) {
+  .role-content-box {
+    grid-template-columns: 1fr;
+    padding: 26px;
+    gap: 24px;
+  }
+}
+
+.role-content-text h3 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.role-content-text p {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.role-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.role-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.role-features-list li svg {
+  color: #10b981;
+  font-size: 16px;
+}
+
+.role-action-card {
+  background: white;
+  border-radius: 14px;
+  padding: 30px;
+  border: 1px solid #e2ebe4;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.role-action-card h4 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.role-action-card p {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.role-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #08775e;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 9px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.role-action-btn:hover {
+  background: #06654f;
+}
+
+/* FAQ Accordion Section */
+.faq-section {
+  max-width: 900px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid #e2ebe4;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.faq-item.open {
+  border-color: #08775e;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.faq-question svg {
+  color: #08775e;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-question svg {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 24px 20px;
+  color: #4b5563;
+  font-size: 14.5px;
+  line-height: 1.6;
+}

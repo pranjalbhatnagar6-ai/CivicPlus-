@@ -10,12 +10,23 @@ import StaffDashboard from "./pages/StaffDashboard";
 import WorkerDashboard from "./pages/WorkerDashboard";
 
 import ReportIssue from "./pages/ReportIssue";
+import ForgotPassword from "./pages/ForgotPassword";
+
+import About from "./pages/About";
+import HowItWorks from "./pages/HowItWorks";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
     <Routes>
-      {/* Home */}
+      {/* Informational Pages */}
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/contact" element={<Contact />} />
+
+      {/* Auth */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       {/* Citizen */}
       <Route path="/citizen/login" element={<CitizenLogin />} />

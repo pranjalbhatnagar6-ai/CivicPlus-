@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaLeaf,
@@ -20,6 +20,8 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import "./CitizenDashboard.css";
+
+const STORAGE_KEY = "civicplus_reports";
 
 const initialReports = [
   {
@@ -52,12 +54,53 @@ const initialReports = [
   },
 ];
 
+function getSavedReports() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved !== null) {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : initialReports;
+    }
+
+    return initialReports;
+  } catch {
+    return initialReports;
+  }
+}
+
 function CitizenDashboard() {
   const navigate = useNavigate();
-  const [reports] = useState(initialReports);
+
+  const [reports, setReports] = useState(getSavedReports);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notice, setNotice] = useState("");
+
+  // Save reports whenever the list changes.
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
+    } catch {
+      setNotice("Unable to save reports in this browser.");
+    }
+  }, [reports]);
+
+  // Refresh when another page or browser tab updates reports.
+  useEffect(() => {
+    const refreshReports = () => {
+      setReports(getSavedReports());
+    };
+
+    window.addEventListener("focus", refreshReports);
+    window.addEventListener("storage", refreshReports);
+
+    return () => {
+      window.removeEventListener("focus", refreshReports);
+      window.removeEventListener("storage", refreshReports);
+    };
+  }, []);
 
   const counts = {
     total: reports.length,
@@ -67,10 +110,10 @@ function CitizenDashboard() {
   };
 
   const filteredReports = reports.filter((report) => {
-    const matchesSearch =
-      `${report.id} ${report.title} ${report.location}`
-        .toLowerCase()
-        .includes(search.toLowerCase());
+    const searchText =
+      `${report.id} ${report.title} ${report.location}`.toLowerCase();
+
+    const matchesSearch = searchText.includes(search.toLowerCase());
 
     const matchesFilter =
       filter === "All" || report.status === filter;
@@ -78,7 +121,28 @@ function CitizenDashboard() {
     return matchesSearch && matchesFilter;
   });
 
-  const logout = () => navigate("/");
+  const logout = () => {
+    navigate("/");
+  };
+
+  const resetFilters = () => {
+    setFilter("All");
+    setSearch("");
+  };
+
+  const statusClass = (status) => {
+    if (status === "Pending") return "status-pending";
+    if (status === "In Progress") return "status-progress";
+    if (status === "Resolved") return "status-resolved";
+    return "";
+  };
+
+  const statusIcon = (status) => {
+    if (status === "Pending") return <FaExclamationCircle />;
+    if (status === "In Progress") return <FaSyncAlt />;
+    if (status === "Resolved") return <FaCheckCircle />;
+    return null;
+  };
 
   return (
     <div className="citizen-app">
@@ -87,32 +151,74 @@ function CitizenDashboard() {
           <span className="citizen-brand-icon">
             <FaLeaf />
           </span>
-          <span>CivicPlus<span className="brand-plus">+</span></span>
+          <span>
+            CivicPlus<span className="brand-plus">+</span>
+          </span>
         </div>
 
         <p className="sidebar-label">MAIN MENU</p>
 
         <nav className="sidebar-nav">
-          <a href="#dashboard" className="sidebar-link active">
-            <FaThLarge /> <span>Dashboard</span>
+          <a
+            href="#dashboard"
+            className="sidebar-link active"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaThLarge />
+            <span>Dashboard</span>
           </a>
-          <a href="#reports" className="sidebar-link">
-            <FaClipboardList /> <span>My Reports</span>
+
+          <a
+            href="#reports"
+            className="sidebar-link"
+            onClick={() => {
+              resetFilters();
+              setSidebarOpen(false);
+            }}
+          >
+            <FaClipboardList />
+            <span>My Reports</span>
           </a>
-          <a href="#reports" className="sidebar-link">
-            <FaMapMarkerAlt /> <span>Track Complaints</span>
+
+          <a
+            href="#reports"
+            className="sidebar-link"
+            onClick={() => {
+              setFilter("All");
+              setSidebarOpen(false);
+            }}
+          >
+            <FaMapMarkerAlt />
+            <span>Track Complaints</span>
           </a>
         </nav>
 
         <p className="sidebar-label account-label">ACCOUNT</p>
 
         <nav className="sidebar-nav">
-          <a href="#profile" className="sidebar-link">
-            <FaUserCircle /> <span>My Profile</span>
-          </a>
-          <a href="#settings" className="sidebar-link">
-            <FaCog /> <span>Settings</span>
-          </a>
+          <button
+            type="button"
+            className="sidebar-link"
+            onClick={() => {
+              setNotice("Profile settings are not connected yet.");
+              setSidebarOpen(false);
+            }}
+          >
+            <FaUserCircle />
+            <span>My Profile</span>
+          </button>
+
+          <button
+            type="button"
+            className="sidebar-link"
+            onClick={() => {
+              setNotice("Account settings are not connected yet.");
+              setSidebarOpen(false);
+            }}
+          >
+            <FaCog />
+            <span>Settings</span>
+          </button>
         </nav>
 
         <div className="sidebar-bottom">
@@ -123,7 +229,8 @@ function CitizenDashboard() {
           </div>
 
           <button className="sidebar-logout" onClick={logout}>
-            <FaSignOutAlt /> Logout
+            <FaSignOutAlt />
+            Logout
           </button>
         </div>
       </aside>
@@ -139,16 +246,31 @@ function CitizenDashboard() {
           </button>
 
           <div className="topbar-breadcrumb">
-            <span>Home</span>
+            <a href="/" style={{ color: "inherit", textDecoration: "none" }}>
+              Home
+            </a>
             <span>/</span>
             <strong>Dashboard</strong>
           </div>
 
           <div className="topbar-right">
-            <button className="notification-button" aria-label="Notifications">
+            <button
+              className="notification-button"
+              aria-label="Notifications"
+              onClick={() =>
+                setNotice(
+                  counts.pending
+                    ? `You have ${counts.pending} pending report(s).`
+                    : "You have no pending reports."
+                )
+              }
+            >
               <FaBell />
-              <span className="notification-dot" />
+              {counts.pending > 0 && (
+                <span className="notification-dot" />
+              )}
             </button>
+
             <div className="topbar-user">
               <div className="user-avatar">C</div>
               <div className="user-details">
@@ -163,7 +285,9 @@ function CitizenDashboard() {
           <section className="welcome-section">
             <div>
               <p className="welcome-eyebrow">CITIZEN PORTAL</p>
-              <h1>Welcome back, Citizen! <span>👋</span></h1>
+              <h1>
+                Welcome back, Citizen! <span>👋</span>
+              </h1>
               <p className="welcome-description">
                 Together, let's make our city cleaner, greener and healthier.
               </p>
@@ -173,16 +297,49 @@ function CitizenDashboard() {
               className="report-primary-button"
               onClick={() => navigate("/citizen/report")}
             >
-              <FaPlus /> Report an Issue
+              <FaPlus />
+              Report an Issue
             </button>
           </section>
 
+          {notice && (
+            <div
+              role="status"
+              style={{
+                background: "#e8f7ee",
+                color: "#166534",
+                padding: "12px 16px",
+                borderRadius: 8,
+                marginBottom: 18,
+                display: "flex",
+                justifyContent: "space-between",
+                gap: 12,
+              }}
+            >
+              <span>{notice}</span>
+              <button
+                onClick={() => setNotice("")}
+                aria-label="Dismiss notification"
+                style={{
+                  border: 0,
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                ✕
+              </button>
+            </div>
+          )}
+
           <section className="impact-banner">
-            <div className="impact-icon"><FaLeaf /></div>
+            <div className="impact-icon">
+              <FaLeaf />
+            </div>
             <div>
               <h2>Your voice matters!</h2>
               <p>
-                Reporting local waste problems helps your municipality take action.
+                Reporting local waste problems helps your municipality take
+                action.
               </p>
             </div>
             <span className="impact-decoration">♻</span>
@@ -190,47 +347,58 @@ function CitizenDashboard() {
 
           <section className="stats-grid">
             <div className="stat-card">
-              <div className="stat-icon stat-green"><FaClipboardList /></div>
+              <div className="stat-icon stat-green">
+                <FaClipboardList />
+              </div>
               <p>Total Reports</p>
               <h2>{counts.total}</h2>
-              <span className="stat-caption">All your submitted reports</span>
+              <span className="stat-caption">
+                All submitted reports
+              </span>
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon stat-orange"><FaClock /></div>
+              <div className="stat-icon stat-orange">
+                <FaClock />
+              </div>
               <p>Pending</p>
               <h2>{counts.pending}</h2>
               <span className="stat-caption">Awaiting action</span>
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon stat-blue"><FaSyncAlt /></div>
+              <div className="stat-icon stat-blue">
+                <FaSyncAlt />
+              </div>
               <p>In Progress</p>
               <h2>{counts.progress}</h2>
-              <span className="stat-caption">Currently being handled</span>
+              <span className="stat-caption">
+                Currently being handled
+              </span>
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon stat-purple"><FaCheckCircle /></div>
+              <div className="stat-icon stat-purple">
+                <FaCheckCircle />
+              </div>
               <p>Resolved</p>
               <h2>{counts.resolved}</h2>
-              <span className="stat-caption">Successfully completed</span>
+              <span className="stat-caption">
+                Successfully completed
+              </span>
             </div>
           </section>
 
           <section className="reports-panel" id="reports">
             <div className="reports-heading">
               <div>
-                <h2>Recent Reports</h2>
-                <p>Keep track of the issues you've reported.</p>
+                <h2>My Reports</h2>
+                <p>Search your complaints and track their status.</p>
               </div>
 
               <button
                 className="view-all-button"
-                onClick={() => {
-                  setFilter("All");
-                  setSearch("");
-                }}
+                onClick={resetFilters}
               >
                 Reset filters <FaArrowRight />
               </button>
@@ -240,16 +408,17 @@ function CitizenDashboard() {
               <div className="report-search">
                 <FaSearch />
                 <input
-                  type="text"
+                  type="search"
                   placeholder="Search reports or locations..."
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(event) => setSearch(event.target.value)}
+                  aria-label="Search reports"
                 />
               </div>
 
               <select
                 value={filter}
-                onChange={(e) => setFilter(e.target.value)}
+                onChange={(event) => setFilter(event.target.value)}
                 aria-label="Filter reports by status"
               >
                 <option value="All">All Statuses</option>
@@ -272,24 +441,21 @@ function CitizenDashboard() {
                     <div className="report-location-icon">
                       <FaMapMarkerAlt />
                     </div>
+
                     <div>
                       <strong>{report.title}</strong>
-                      <span>{report.id} · {report.location}</span>
+                      <span>
+                        {report.id} · {report.location}
+                      </span>
                     </div>
                   </div>
 
                   <span className="report-date">{report.date}</span>
 
-                  <span className={`status-badge ${
-                    report.status === "Pending"
-                      ? "status-pending"
-                      : report.status === "In Progress"
-                      ? "status-progress"
-                      : "status-resolved"
-                  }`}>
-                    {report.status === "Pending" && <FaExclamationCircle />}
-                    {report.status === "In Progress" && <FaSyncAlt />}
-                    {report.status === "Resolved" && <FaCheckCircle />}
+                  <span
+                    className={`status-badge ${statusClass(report.status)}`}
+                  >
+                    {statusIcon(report.status)}
                     {report.status}
                   </span>
                 </div>
@@ -297,7 +463,8 @@ function CitizenDashboard() {
 
               {filteredReports.length === 0 && (
                 <div className="reports-empty">
-                  No reports match your search.
+                  No reports match your search. Try changing your search or
+                  filter.
                 </div>
               )}
             </div>
@@ -308,8 +475,12 @@ function CitizenDashboard() {
           </section>
 
           <footer className="citizen-footer">
-            <span>© 2026 CivicPlus+ · Building cleaner communities together.</span>
-            <span>Made for a cleaner tomorrow <FaLeaf /></span>
+            <span>
+              © 2026 CivicPlus+ · Building cleaner communities together.
+            </span>
+            <span>
+              Made for a cleaner tomorrow <FaLeaf />
+            </span>
           </footer>
         </div>
       </main>
