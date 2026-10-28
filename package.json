@@ -1,0 +1,14 @@
+{
+  "name": "civicplus",
+  "private": true,
+  "description": "Convenience scripts for the CivicPlus+ monorepo (Frontend + backend are separate npm projects)",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix Frontend install",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:Frontend": "npm --prefix Frontend run dev",
+    "test": "npm --prefix backend test && npm --prefix Frontend test",
+    "typecheck": "npm --prefix backend run typecheck",
+    "lint": "npm --prefix Frontend run lint",
+    "build": "npm --prefix backend run build && npm --prefix Frontend run build"
+  }
+}
