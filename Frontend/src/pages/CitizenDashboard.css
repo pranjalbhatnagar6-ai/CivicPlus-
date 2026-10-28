@@ -39,6 +39,14 @@
   font-size: 23px;
   font-weight: 800;
   letter-spacing: -0.7px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.citizen-brand:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 .citizen-brand-icon {

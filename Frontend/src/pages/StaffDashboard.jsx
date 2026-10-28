@@ -1,5 +1,7 @@
 
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaLocationDot } from "react-icons/fa6";
 
 const initialReports = [
   {
@@ -132,21 +134,65 @@ export default function StaffDashboard() {
   return (
     <div style={styles.page}>
       <header style={styles.header}>
-        <div>
-          <div style={{ fontSize: 13, opacity: 0.8 }}>
-            CIVICPLUS · STAFF PORTAL
-          </div>
-          <h1 style={{ margin: "7px 0", fontSize: 26 }}>
-            Staff Dashboard
-          </h1>
-          <div style={{ fontSize: 14 }}>
-            Manage public waste complaints and cleanup activities.
+        <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              textDecoration: "none",
+              color: "white",
+              cursor: "pointer",
+            }}
+            title="Go to CivicPlus+ Homepage"
+          >
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                backgroundColor: "#22c55e",
+                borderRadius: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 20,
+                color: "white",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              }}
+            >
+              <FaLocationDot />
+            </div>
+            <div>
+              <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.1 }}>
+                CivicPlus<span style={{ color: "#86efac" }}>+</span>
+              </div>
+              <div style={{ fontSize: 11, opacity: 0.85 }}>Staff Portal</div>
+            </div>
+          </Link>
+
+          <div
+            style={{
+              width: 1,
+              height: 36,
+              background: "rgba(255,255,255,0.25)",
+              display: "inline-block",
+            }}
+          />
+
+          <div>
+            <h1 style={{ margin: "0", fontSize: 22, fontWeight: 700 }}>
+              Staff Dashboard
+            </h1>
+            <div style={{ fontSize: 13, opacity: 0.85, marginTop: 2 }}>
+              Manage public waste complaints and cleanup activities.
+            </div>
           </div>
         </div>
 
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: 14 }}>Staff Administrator</div>
-          <div style={{ fontSize: 12, opacity: 0.8, marginTop: 5 }}>
+          <div style={{ fontSize: 14, fontWeight: 600 }}>Staff Administrator</div>
+          <div style={{ fontSize: 12, opacity: 0.85, marginTop: 3 }}>
             Waste Management Department
           </div>
         </div>

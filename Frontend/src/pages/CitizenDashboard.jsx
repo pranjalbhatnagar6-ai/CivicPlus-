@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaLeaf,
   FaThLarge,
@@ -147,14 +147,19 @@ function CitizenDashboard() {
   return (
     <div className="citizen-app">
       <aside className={`citizen-sidebar ${sidebarOpen ? "open" : ""}`}>
-        <div className="citizen-brand">
+        <Link
+          to="/"
+          className="citizen-brand"
+          style={{ textDecoration: "none" }}
+          title="Go to CivicPlus+ Homepage"
+        >
           <span className="citizen-brand-icon">
             <FaLeaf />
           </span>
           <span>
             CivicPlus<span className="brand-plus">+</span>
           </span>
-        </div>
+        </Link>
 
         <p className="sidebar-label">MAIN MENU</p>
 
@@ -246,9 +251,9 @@ function CitizenDashboard() {
           </button>
 
           <div className="topbar-breadcrumb">
-            <a href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
               Home
-            </a>
+            </Link>
             <span>/</span>
             <strong>Dashboard</strong>
           </div>

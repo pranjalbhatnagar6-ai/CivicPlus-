@@ -1,14 +1,68 @@
 
+import { Link } from "react-router-dom";
+import { FaLocationDot } from "react-icons/fa6";
 import { FaBroom, FaClipboardList, FaCheckCircle } from "react-icons/fa";
 
 function WorkerDashboard() {
   return (
     <main style={styles.page}>
       <header style={styles.header}>
-        <div>
-          <h1>Worker Dashboard</h1>
-          <p>Welcome to CivicPlus+ Sanitation Services</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              textDecoration: "none",
+              color: "#1f2937",
+              cursor: "pointer",
+            }}
+            title="Go to CivicPlus+ Homepage"
+          >
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                backgroundColor: "#08775e",
+                borderRadius: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 20,
+                color: "white",
+                boxShadow: "0 2px 8px rgba(8,119,94,0.2)",
+              }}
+            >
+              <FaLocationDot />
+            </div>
+            <div>
+              <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.1 }}>
+                CivicPlus<span style={{ color: "#08775e" }}>+</span>
+              </div>
+              <div style={{ fontSize: 11, color: "#6b7280" }}>Sanitation Services</div>
+            </div>
+          </Link>
+
+          <div
+            style={{
+              width: 1,
+              height: 36,
+              background: "#d1d5db",
+              display: "inline-block",
+            }}
+          />
+
+          <div>
+            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>
+              Worker Dashboard
+            </h1>
+            <p style={{ margin: 0, fontSize: 13, color: "#6b7280", marginTop: 2 }}>
+              Welcome to CivicPlus+ Sanitation Services
+            </p>
+          </div>
         </div>
+
         <span style={styles.badge}>Sanitation Worker</span>
       </header>
 

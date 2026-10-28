@@ -31,7 +31,9 @@ function LoginForm({ role }) {
       <div className="login-card">
 
         <div className="login-header">
-          <div className="login-logo">📍</div>
+          <Link to="/" style={{ textDecoration: "none" }} title="Go to CivicPlus+ Homepage">
+            <div className="login-logo" style={{ cursor: "pointer" }}>📍</div>
+          </Link>
 
           <h1>
             {isCitizen

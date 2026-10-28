@@ -18,6 +18,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-logo:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
 .logo-icon {

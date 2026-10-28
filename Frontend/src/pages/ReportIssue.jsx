@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaLocationDot } from "react-icons/fa6";
 import {
   FaArrowLeft,
   FaMapMarkerAlt,
@@ -131,6 +132,15 @@ function ReportIssue() {
   return (
     <div className="issue-page">
       <header className="issue-header">
+        <Link to="/" className="issue-logo-link" title="Go to CivicPlus+ Homepage">
+          <div className="issue-logo-icon">
+            <FaLocationDot />
+          </div>
+          <span className="issue-logo-text">
+            CivicPlus<span>+</span>
+          </span>
+        </Link>
+
         <button
           type="button"
           className="issue-back"
@@ -138,10 +148,6 @@ function ReportIssue() {
         >
           <FaArrowLeft /> Back to Dashboard
         </button>
-
-        <strong>
-          CivicPlus<span>+</span>
-        </strong>
       </header>
 
       <main className="issue-container">
