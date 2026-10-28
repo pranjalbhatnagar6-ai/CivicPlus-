@@ -1,3 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Primary Colors */
+  --cc-green-900: #064e3b;
+  --cc-green-800: #085a44;
+  --cc-green-700: #08775e;
+  --cc-green-600: #059669;
+  --cc-green-500: #10b981;
+  --cc-green-100: #d1fae5;
+  --cc-green-50: #ecfdf5;
+
+  /* Role / Accent Colors */
+  --cc-citizen-btn: #08775e;
+  --cc-staff-btn: #7a3328;
+  --cc-worker-btn: #e0901b;
+
+  /* Priority and Alert Colors */
+  --cc-critical: #dc2626;
+  --cc-critical-bg: #fee2e2;
+  --cc-high: #ea580c;
+  --cc-high-bg: #ffedd5;
+  --cc-medium: #d97706;
+  --cc-medium-bg: #fef3c7;
+  --cc-resolved: #16a34a;
+  --cc-resolved-bg: #dcfce7;
+  --cc-pending: #475569;
+  --cc-pending-bg: #f1f5f9;
+
+  /* Backgrounds & Neutrals */
+  --cc-bg-page: #f8faf8;
+  --cc-bg-card: #ffffff;
+  --cc-border: #e2ede5;
+  --cc-border-light: #edf3ee;
+  --cc-text-main: #111827;
+  --cc-text-muted: #64748b;
+  --cc-text-light: #94a3b8;
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadow system */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(8, 119, 94, 0.04), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 10px 25px rgba(8, 119, 94, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-floating: 0 14px 34px rgba(0, 0, 0, 0.08);
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,8 +67,17 @@ body,
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #ffffff;
+  font-family: var(--font-body);
+  background-color: var(--cc-bg-page);
+  color: var(--cc-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--cc-text-main);
+  letter-spacing: -0.02em;
 }
 
 button,
@@ -21,4 +85,28 @@ input,
 textarea,
 select {
   font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

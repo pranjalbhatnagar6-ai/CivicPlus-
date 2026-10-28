@@ -1,0 +1,61 @@
+.clean-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.clean-brand-logo:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.brand-leaf-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #08775e;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.clean-brand-logo:hover .brand-leaf-icon {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: -2px;
+}
+
+/* Sizing */
+.clean-brand-logo.sm .brand-leaf-icon { font-size: 18px; }
+.clean-brand-logo.sm .brand-name { font-size: 18px; }
+
+.clean-brand-logo.md .brand-leaf-icon { font-size: 22px; }
+.clean-brand-logo.md .brand-name { font-size: 22px; }
+
+.clean-brand-logo.lg .brand-leaf-icon { font-size: 28px; }
+.clean-brand-logo.lg .brand-name { font-size: 26px; }
+
+/* Themes */
+.clean-brand-logo.white .brand-leaf-icon { color: #a7f3d0; }
+.clean-brand-logo.white .brand-name { color: #ffffff; }
+.clean-brand-logo.white .brand-subtitle { color: #d1fae5; }

@@ -1,0 +1,25 @@
+.city-backdrop-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.city-backdrop-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.city-backdrop-wrap.fixed-bg {
+  position: fixed;
+}
+
+.city-backdrop-wrap.hero-only {
+  height: 100%;
+}
