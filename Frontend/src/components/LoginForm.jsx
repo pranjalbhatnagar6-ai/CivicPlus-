@@ -86,7 +86,11 @@ function LoginForm({ role }) {
               Remember me
             </label>
 
-            <button type="button" className="forgot-password">
+            <button
+              type="button"
+              className="forgot-password"
+              onClick={() => navigate("/forgot-password", { state: { role } })}
+            >
               Forgot password?
             </button>
           </div>
