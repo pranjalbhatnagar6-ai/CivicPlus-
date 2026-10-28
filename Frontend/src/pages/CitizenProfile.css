@@ -1,0 +1,357 @@
+.clean-profile-page {
+  min-height: 100vh;
+  background-color: #f7faf8;
+  padding-bottom: 90px;
+}
+
+@media (min-width: 1024px) {
+  .clean-profile-page {
+    padding-bottom: 40px;
+  }
+}
+
+.profile-main-container {
+  max-width: 1050px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+.profile-page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 24px;
+}
+
+/* Two-column layout matching Page 10 */
+.profile-content-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 26px;
+}
+
+@media (max-width: 860px) {
+  .profile-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Column */
+.profile-user-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-ident-card {
+  background: #ffffff;
+  border: 1px solid var(--cc-border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.user-photo-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #08775e;
+  margin-bottom: 12px;
+}
+
+.user-name-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.user-member-since {
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+/* Settings Box */
+.profile-settings-card {
+  background: #ffffff;
+  border: 1px solid var(--cc-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.settings-box-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.settings-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 9px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.settings-row-item:hover {
+  background: #f1f5f3;
+  color: #111827;
+}
+
+.settings-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-row-item.logout {
+  color: #dc2626;
+  margin-top: 6px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 14px;
+}
+
+.settings-row-item.logout:hover {
+  background: #fee2e2;
+}
+
+/* Right Column: Rewards & Leaderboard */
+.profile-rewards-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Tier Card */
+.tier-progress-card {
+  background: #ffffff;
+  border: 1px solid var(--cc-border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
+}
+
+.tier-top-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.tier-medal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #fef3c7;
+  color: #d97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.tier-titles-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tier-badge-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.premium-badge {
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.tier-main-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.tier-points-display {
+  font-size: 32px;
+  font-weight: 800;
+  color: #08775e;
+  margin-bottom: 12px;
+}
+
+.tier-points-display span {
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.tier-bar-track {
+  height: 10px;
+  background: #e5ede7;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.tier-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #08775e 0%, #10b981 70%, #f59e0b 100%);
+}
+
+.tier-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.tier-next-target {
+  font-weight: 700;
+  color: #374151;
+}
+
+.tier-perks-tag {
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* Leaderboard Card */
+.leaderboard-card {
+  background: #ffffff;
+  border: 1px solid var(--cc-border);
+  border-radius: 18px;
+  padding: 26px 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.leaderboard-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.leaderboard-date-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f3;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.leaderboard-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leader-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #edf4ef;
+  transition: all 0.2s;
+}
+
+.leader-row:hover {
+  background: #f8faf8;
+}
+
+.leader-row.current-user {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.leader-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.leader-rank-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.rank-first { background: #fef3c7; color: #b45309; }
+.rank-second { background: #e2e8f0; color: #475569; }
+.rank-third { background: #08775e; color: #ffffff; }
+.rank-normal { background: #f8faf9; color: #64748b; border: 1px solid #e2e8f0; }
+
+.leader-avatar-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.leader-names strong {
+  display: block;
+  font-size: 14px;
+  color: #111827;
+}
+
+.leader-names span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.leader-pts {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.leader-pts small {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
